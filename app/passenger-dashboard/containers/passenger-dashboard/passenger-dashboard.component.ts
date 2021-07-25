@@ -1,7 +1,7 @@
 import { Passenger } from "./../../models/passenger.interface";
 import { Component, OnInit } from "@angular/core";
 import { PassengerDashboardService } from "../../passenger-dashboard.service";
-import { subscribeOn } from "rxjs/operator/subscribeOn";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "passenger-dashboard",
@@ -10,7 +10,9 @@ import { subscribeOn } from "rxjs/operator/subscribeOn";
 })
 export class PassengerDashboardComponent implements OnInit {
   passengers: Passenger[];
-  constructor(private PassengerService: PassengerDashboardService) {}
+  constructor(
+    private router: Router,
+    private PassengerService: PassengerDashboardService) {}
   ngOnInit() {
     this.PassengerService.getPassengers().subscribe(
       (data: Passenger[]) => (this.passengers = data)
@@ -35,5 +37,8 @@ export class PassengerDashboardComponent implements OnInit {
         return passenger;
       });
     });
+  }
+  handleView(event: Passenger) {
+    this.router.navigate(['/passengers', event.id])
   }
 }

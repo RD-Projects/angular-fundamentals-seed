@@ -1,15 +1,31 @@
 import { Component } from '@angular/core'
 
+interface Nav {
+  link: string,
+  name: string,
+  exact: boolean
+}
 @Component({
   selector: 'app-root',
-  template: `
-  <div class="app">
-    <passenger-dashboard></passenger-dashboard>
-  </div>`,
+  templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  constructor() {
-
-  }
+  nav: Nav[] = [
+    {
+      link: '/',
+      name: 'Home',
+      exact: true
+    },
+    {
+      link: '/passengers',
+      name: 'Passengers',
+      exact: true
+    },
+    {
+      link: '/oops',
+      name: '404',
+      exact: false
+    }
+  ]
 }

@@ -10,7 +10,8 @@
           "name": "Minae",
           "age": 1
         }
-      ]
+      ],
+      "baggage": "none"
     },
     {
       "id": 2,
@@ -22,7 +23,8 @@
           "name": "Minae",
           "age": 1
         }
-      ]
+      ],
+      "baggage": ""
     },
     {
       "id": 3,

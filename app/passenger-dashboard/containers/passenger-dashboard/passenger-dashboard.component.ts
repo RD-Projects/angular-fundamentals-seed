@@ -12,7 +12,8 @@ export class PassengerDashboardComponent implements OnInit {
   passengers: Passenger[];
   constructor(
     private router: Router,
-    private PassengerService: PassengerDashboardService) {}
+    private PassengerService: PassengerDashboardService
+  ) {}
   ngOnInit() {
     this.PassengerService.getPassengers().subscribe(
       (data: Passenger[]) => (this.passengers = data)
@@ -20,25 +21,27 @@ export class PassengerDashboardComponent implements OnInit {
   }
 
   handleRemove(event: Passenger) {
-    this.PassengerService.removePassenger(event)
-    .subscribe((data: Passenger) => {
-      this.passengers = this.passengers.filter(
-        (passenger: Passenger) => passenger.id !== event.id
-      );
-    })
+    this.PassengerService.removePassenger(event).subscribe(
+      (data: Passenger) => {
+        this.passengers = this.passengers.filter(
+          (passenger: Passenger) => passenger.id !== event.id
+        );
+      }
+    );
   }
   handleEdit(event: Passenger) {
-    this.PassengerService.updatePassenger(event)
-    .subscribe((data: Passenger) => {
-      this.passengers = this.passengers.map((passenger: Passenger) => {
-        if (passenger.id === event.id) {
-          passenger = Object.assign({}, passenger, event);
-        }
-        return passenger;
-      });
-    });
+    this.PassengerService.updatePassenger(event).subscribe(
+      (data: Passenger) => {
+        this.passengers = this.passengers.map((passenger: Passenger) => {
+          if (passenger.id === event.id) {
+            passenger = Object.assign({}, passenger, event);
+          }
+          return passenger;
+        });
+      }
+    );
   }
   handleView(event: Passenger) {
-    this.router.navigate(['/passengers', event.id])
+    this.router.navigate(["/passengers", event.id]);
   }
 }
